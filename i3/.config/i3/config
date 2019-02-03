@@ -102,7 +102,7 @@ floating_modifier $mod
 bindsym $mod+q                  [con_id="__focused__" instance="^(?!dropdown_).*$"] kill
 bindsym $mod+Shift+q            [con_id="__focused__" instance="^(?!dropdown_).*$"] kill
 
-bindsym $mod+n                  startup-id $BROWSER
+bindsym $mod+n                  exec --no-startup-id $BROWSER
 
 bindsym $mod+r                  exec $term -e $FILE
 bindsym $mod+Shift+r            exec --no-startup-id winresize
