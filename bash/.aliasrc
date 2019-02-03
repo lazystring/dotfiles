@@ -26,17 +26,21 @@ dotify() {
   fi
   
   dotfile_dirname=$(dirname $(realpath $1))
-  dotfile_path=$(realpath -sm $HOME/.dotfiles/$2/${dotfile_dirname#"$HOME"})
 
-  if [ -f "$dotfile_path/$1" ]; then
-    echo "Dotfile already exists at $dotfile_path/$1"
+  # If already sym-linked, skip.
+  if [ -L $1 ]; then
+    echo "Dotfile already linked to $(realpath $1)"
+    return
   fi
+  
+  dotfile_path=$(realpath -sm $HOME/.dotfiles/$2/${dotfile_dirname#"$HOME"})
+  dotfile_name=$(basename $1)
   
   mkdir -p $dotfile_path
   mv $1 $dotfile_path
   (cd ~/.dotfiles && stow $2)
 
-  echo "Created dotfile at $dotfile_path/$1"
+  echo "Created dotfile at $dotfile_path/$dotfile_name"
 }
   
   
