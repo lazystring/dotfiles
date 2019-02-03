@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Custom bash aliases and functions.
+
+alias p="sudo pacman"
+alias e="emacs -nw"
+alias g="git"
+alias mkd="mkdir -pv"
+alias ls="ls -hN --color=auto --group-directories-first"
+alias grep="grep --color=auto"
+alias ccat="highlight --out-format=ansi"
+
+esource() {
+    e $1 && source $1
+}
+	
+	   
