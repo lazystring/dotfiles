@@ -16,4 +16,27 @@ esource() {
     e $1 && source $1
 }
 	
-	   
+
+# Adds a dot file to the dotfiles git repo.
+# Ex. dotify .emacs emacs/
+dotify() {
+  if [ "$#" -ne 2 ]; then
+    echo "Usage: dotify <dotfile> <dotfile_container_name>"
+    return
+  fi
+  
+  dotfile_dirname=$(dirname $(realpath $1))
+  dotfile_path=$(realpath -sm $HOME/.dotfiles/$2/${dotfile_dirname#"$HOME"})
+
+  if [ -f "$dotfile_path/$1" ]; then
+    echo "Dotfile already exists at $dotfile_path/$1"
+  fi
+  
+  mkdir -p $dotfile_path
+  mv $1 $dotfile_path
+  (cd ~/.dotfiles && stow $2)
+
+  echo "Created dotfile at $dotfile_path/$1"
+}
+  
+  
