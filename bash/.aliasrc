@@ -9,6 +9,8 @@ alias mkd="mkdir -pv"
 alias ls="ls -hN --color=auto --group-directories-first"
 alias grep="grep --color=auto"
 alias ccat="highlight --out-format=ansi"
+alias icfg="e $HOME/.config/i3/config"
+alias nf="neofetch"
 
 esource() {
     e $1 && source $1
