@@ -1,0 +1,208 @@
+## Configuration settings for i3wm.
+
+## i3-gaps settings ##
+for_window [class="^.*"] border pixel 2
+gaps inner 15
+gaps outer 15
+
+## Basic definitions ##
+set $mod Mod4
+set $term --no-startup-id $TERMINAL
+font pango:Monaco 8
+
+## Dropdown window settings ##
+for_window [instance="dropdown_*"] floating enable
+for_window [instance="dropdown_*"] move scratchpad
+for_window [instance="dropdown_*"] sticky enable
+for_window [instance="dropdown_*"] scratchpad show
+for_window [instance="dropdown_tmuxdd"] resize set 625 450
+for_window [instance="dropdown_dropdowncalc"] resize set 800 300
+for_window [instance="dropdown_tmuxdd"] border pixel 3
+for_window [instance="dropdown_dropdowncalc"] border pixel 2
+for_window [instance="dropdown_*"] move position center
+
+## Running external scripts ##
+
+# Composite manager:
+exec --no-startup-id compton -b
+
+# Dunst for notifications:
+exec --no-startup-id dunst
+
+# Set the background plz:
+exec --no-startup-id feh --bg-scale ~/.config/wallpaper.png
+
+## Theme ##
+
+# Set Xresources colors.
+set_from_resource $darkblack    color0  #000000
+set_from_resource $black        color8  #000000
+set_from_resource $darkred      color1  #000000
+set_from_resource $red          color9  #000000
+set_from_resource $darkgreen    color2  #000000
+set_from_resource $green        color10 #000000
+set_from_resource $darkyellow   color3  #000000
+set_from_resource $yellow       color11 #000000
+set_from_resource $darkblue     color4  #000000
+set_from_resource $blue         color12 #000000
+set_from_resource $darkmagenta  color5  #000000
+set_from_resource $magenta      color13 #000000
+set_from_resource $darkcyan     color6  #000000
+set_from_resource $cyan         color14 #000000
+set_from_resource $darkwhite    color7  #000000
+set_from_resource $white        color15 #000000
+set $transparent                #00000000
+
+#                       BORDER          BACKGROUND      TEXT            INDICATOR               CHILD_BORDER
+client.focused          $red            $red            $magenta        $darkmagenta            $darkblue
+client.unfocused        $transparent    $blue           $white          $darkblue               $darkblack
+client.focused_inactive $transparent    $blue           $white          $darkblue               $darkblack
+client.urgent           $darkred        $darkred        $black          $darkred                $darkred
+client.background $transparent
+
+bar {
+  status_command i3blocks
+  position top
+  tray_output none
+  mode dock
+  modifier None
+
+  colors {
+    background $darkblack
+    statusline $darkwhite
+    separator $cyan
+    focused_workspace  $blue $darkblue $darkblack
+    active_workspace   $blue $blue $darkwhite
+    inactive_workspace $darkblack $darkblack $white
+    urgent_workspace   $darkblack $darkblack $white
+  }
+}
+
+## Basic Bindings ##
+
+bindsym $mod+Return             exec $term
+
+bindsym $mod+space              focus mode_toggle
+bindsym $mod+Shift+space        floating toggle
+
+bindsym $mod+Escape             workspace prev
+bindsym $mod+Shift+Escape       exec --no-startup-id prompt "Exit i3?" "i3-msg exit"
+
+bindsym $mod+Shift+BackSpace    exec --no-startup-id prompt "Reboot computer?" "$reboot"
+
+# Show selection:
+bindsym $mod+Insert             exec --no-startup-id showclip
+bindsym $mod+Pause              exec --no-startup-id xcqr
+
+# use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+## Letter Key Bindings ##
+
+bindsym $mod+q                  [con_id="__focused__" instance="^(?!dropdown_).*$"] kill
+bindsym $mod+Shift+q            [con_id="__focused__" instance="^(?!dropdown_).*$"] kill
+
+bindsym $mod+n                  startup-id $BROWSER
+
+bindsym $mod+r                  exec $term -e $FILE
+bindsym $mod+Shift+r            exec --no-startup-id winresize
+
+bindsym $mod+t                  split toggle
+bindsym $mod+Shift+t            gaps inner current set 15; gaps outer current set 15
+
+bindsym $mod+Shift+y            exec --no-startup-id i3resize left
+
+
+bindsym $mod+Shift+u            exec --no-startup-id i3resize down
+
+bindsym $mod+i                  exec $term -e gtop
+bindsym $mod+Shift+i            exec --no-startup-id i3resize up
+
+bindsym $mod+o                  sticky toggle
+bindsym $mod+Shift+o            exec --no-startup-id i3resize right
+
+
+bindsym $mod+Shift+a            exec $term -e pacmixer
+
+bindsym $mod+s                  gaps inner current plus 5
+bindsym $mod+Shift+s            gaps inner current minus 5
+
+bindsym $mod+d                  exec --no-startup-id dmenu_run
+bindsym $mod+Shift+d            gaps inner current set 0; gaps outer current set 0
+
+bindsym $mod+f                  fullscreen toggle
+
+bindsym $mod+g                  workspace prev
+
+bindsym $mod+h                  focus left
+bindsym $mod+Shift+h            move left 30
+
+bindsym $mod+j                  focus down
+bindsym $mod+Shift+j            move down 30
+
+bindsym $mod+k                  focus up
+bindsym $mod+Shift+k            move up 30
+
+bindsym $mod+l                  focus right
+bindsym $mod+Shift+l            move right 30
+
+bindsym $mod+z                  gaps outer current plus 5
+bindsym $mod+Shift+z            gaps outer current minus 5
+
+bindsym $mod+x                  exec --no-startup-id lock-screen
+bindsym $mod+Shift+x            exec --no-startup-id prompt "Shutdown computer?" "$shutdown"
+
+bindsym $mod+b                  bar mode toggle
+
+bindsym $mod+c                  reload
+bindsym $mod+Shift+c            restart
+
+## Workspace Bindings ##
+
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# Switch to workspace.
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+# Move focused container to workspace.
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+
+## Audio controls.
+bindsym XF86AudioRaiseVolume    exec --no-startup-id pulsemixer --change-volume +5
+bindsym XF86AudioLowerVolume    exec --no-startup-id pulsemixer --change-volume -5
+bindsym XF86AudioMute           exec --no-startup-id pulsemixer --toggle-mute
+bindsym XF86AudioPlay           exec playerctl play
+bindsym XF86AudioPause          exec playerctl pause
+bindsym XF86AudioNext           exec playerctl next
+bindsym XF86AudioPrev           exec playerctl previous
+
+## Screenshots and recording
+bindsym Print                   exec --no-startup-id deepin-screenshot
