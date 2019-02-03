@@ -104,7 +104,7 @@ bindsym $mod+Shift+q            [con_id="__focused__" instance="^(?!dropdown_).*
 
 bindsym $mod+n                  exec --no-startup-id $BROWSER
 
-bindsym $mod+r                  exec $term -e $FILE
+bindsym $mod+r                  exec $term -e $FILEMGR
 bindsym $mod+Shift+r            exec --no-startup-id winresize
 
 bindsym $mod+t                  split toggle
