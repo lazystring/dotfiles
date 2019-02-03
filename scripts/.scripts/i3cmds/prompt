@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Uses dmenu to prompt the user to run a command.
+# Args:
+#   $1: The prompt to display to the user.
+#   $2: The command to run after user confirmation.
+
+[ "$(printf "No\\nYes" | dmenu -i -p "$1" -nb darkred -sb red -sf white -nf gray )" = "Yes" ] && $2

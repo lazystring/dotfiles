@@ -1,0 +1,48 @@
+#!/bin/sh
+
+# Color of the background inside the circle.
+INSIDE_COLOR='#182438ff'
+INSIDE_VERIF_COLOR='#8fb5a5ff'
+
+# Color of the ring surrounding the circle.
+RING_COLOR='#4eaa85ff'
+
+# Color of highlight strokes that appear upon keypress.
+KEY_HL_COLOR='#25513fff'
+
+# Text color when verifying the password.
+TEXT_VERIF_COLOR='#303533ff'
+
+
+i3lock \
+    --insidecolor=$INSIDE_COLOR \
+    --insidevercolor=$INSIDE_VERIF_COLOR \
+    --ringcolor=$RING_COLOR \
+    --ringvercolor=$RING_COLOR \
+    --timecolor=$RING_COLOR \
+    --datecolor=$RING_COLOR \
+    --verifcolor=$TEXT_VERIF_COLOR \
+    --keyhlcolor=$KEY_HL_COLOR \
+    --screen 1            \
+    --blur 10              \
+    --clock               \
+    --indicator           \
+    --timestr="%H:%M"  \
+    --datestr="%A, %m %Y" \
+    --veriftext="Beep boop..." \
+    --verifsize=14 \
+    --wrongtext="You lion." \
+    --wrongsize=14
+    --time-font=Monaco \
+    --verif-font=Monaco \
+    --wrong-font=Monaco \
+    --layout-font=Monaco \
+    --date-font=Monaco
+
+# --veriftext="Drinking verification can..."
+# --wrongtext="Nope!"
+# --textsize=20
+# --modsize=10
+# --timefont=comic-sans
+# --datefont=monofur
+# etc
