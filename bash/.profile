@@ -4,3 +4,4 @@
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
 export EDITOR="emacs"
+export TERMINAL="st"
