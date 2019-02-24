@@ -5,6 +5,9 @@ align=center
 separator_block_width=30
 markup=pango
 
+[speed]
+interval=1
+
 [volume]
 interval=once
 signal=10
@@ -19,5 +22,5 @@ command=date '+%H:%M:%S'
 interval=1
 
 [user]
-command=echo "$(whoami)  "
+command=echo "$(whoami)@$(hostname)  "
 interval=once
