@@ -15,9 +15,11 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
 (add-to-list 'load-path "~/.emacs.d/elisp/")
-(load-library "general")
-(load-library "style")
-(load-library "editing")
+(add-to-list 'load-path "~/.emacs.d/elisp/lang/")
+
+(require 'general)
+(require 'editing)
+(require 'style)
 
 (custom-set-variables
  '(package-selected-packages
