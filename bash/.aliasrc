@@ -10,12 +10,13 @@ alias ls="ls -hN --color=auto --group-directories-first"
 alias grep="grep --color=auto"
 alias ccat="highlight --out-format=ansi"
 alias icfg="e $HOME/.config/i3/config"
+alias ecfg="e $HOME/.emacs.d/init.el"
 alias nf="neofetch"
 
 esource() {
     e $1 && source $1
 }
-	
+
 
 # Adds a dot file to the dotfiles git repo.
 # Ex. dotify .emacs emacs/
@@ -24,7 +25,7 @@ dotify() {
     echo "Usage: dotify <dotfile> <dotfile_container_name>"
     return
   fi
-  
+
   dotfile_dirname=$(dirname $(realpath $1))
 
   # If already sym-linked, skip.
@@ -32,15 +33,33 @@ dotify() {
     echo "Dotfile already linked to $(realpath $1)"
     return
   fi
-  
+
   dotfile_path=$(realpath -sm $HOME/.dotfiles/$2/${dotfile_dirname#"$HOME"})
   dotfile_name=$(basename $1)
-  
+
   mkdir -p $dotfile_path
   mv $1 $dotfile_path
   (cd ~/.dotfiles && stow $2)
 
   echo "Created dotfile at $dotfile_path/$dotfile_name"
 }
-  
-  
+
+
+# Repurposes the Caps Lock key as a Control key.
+# Ex. capswap enable
+capswap() {
+  if [ "$#" -ne 1 ] || [[ "$1" != "enable" && "$1" != "disable" ]]; then
+    echo "Usage: capswap enable|disable"
+    return
+  fi
+
+  if [ "$1" = "enable" ]; then
+    sudo xmodmap -e "remove lock = Caps_Lock"
+    sudo xmodmap -e "add control = Caps_Lock"
+    sudo xmodmap -e "keysym Caps_Lock = Control_L"
+  else
+    sudo xmodmap -e "keycode 66 = Caps_Lock"
+    sudo xmodmap -e "remove control = Caps_Lock"
+    sudo xmodmap -e "add lock = Caps_Lock"
+  fi
+}

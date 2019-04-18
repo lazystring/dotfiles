@@ -7,6 +7,8 @@
 
 (require 'tide)
 
+(setq-default typescript-indent-level 2)
+
 (add-hook 'typescript-mode-hook
           (lambda ()
             (tide-setup)

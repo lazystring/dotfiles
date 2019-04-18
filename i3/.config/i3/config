@@ -157,6 +157,10 @@ bindsym $mod+b                  bar mode toggle
 bindsym $mod+c                  reload
 bindsym $mod+Shift+c            restart
 
+bindsym $mod+v                  exec --no-startup-id vpntoggle
+
+bindsym $mod+e                  exec --no-startup-id emacs
+
 ## Workspace Bindings ##
 
 set $ws1 "1"

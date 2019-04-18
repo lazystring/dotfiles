@@ -5,7 +5,7 @@ align=center
 separator_block_width=30
 markup=pango
 
-[speed]
+[wifi]
 interval=1
 
 [volume]

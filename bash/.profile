@@ -5,6 +5,7 @@
 
 # Adds `~/.scripts` and all subdirectories to $PATH
 export PATH="$PATH:$(du "$HOME/.scripts/" | cut -f2 | tr '\n' ':')"
+export PATH="$PATH:$HOME/.npm-global/bin/"
 export BROWSER="google-chrome-stable"
 export EDITOR="emacs"
 export TERMINAL="st"

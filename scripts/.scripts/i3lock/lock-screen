@@ -1,7 +1,7 @@
 #!/bin/bash
 ICON=/tmp/xkcd.png
 TMPBG=/tmp/screen.png
-curl -s $(curl -sL "http://dynamic.xkcd.com/random/comic/" | grep -o "https://imgs.xkcd.com/comics/[^ ]*") -o $ICON &
+curl -s $(curl -sL "https://xkcd.com/$(( RANDOM % 2000))" | grep -o "https://imgs.xkcd.com/comics/[^ ]*") -o $ICON &
 scrot $TMPBG && mogrify -scale 5% -blur 0x2 -filter lanczos -resize 2000% $TMPBG &
 wait
 
