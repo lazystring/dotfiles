@@ -22,12 +22,6 @@
 (global-nlinum-mode 1)
 (add-hook 'nlinum-mode-hook #'my-nlinum-mode-hook)
 
-(require 'nlinum-relative)
-(add-hook 'prog-mode-hook 'nlinum-relative-mode)
-(setq nlinum-relative-redisplay-delay 0)
-(setq nlinum-relative-current-symbol "")
-(setq nlinum-relative-offset 0)
-
 (setq-default truncate-lines t)
 
 ;; In graphical mode, remove graphical elements.
