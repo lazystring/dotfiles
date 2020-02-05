@@ -153,6 +153,7 @@ bindsym $mod+x                  exec --no-startup-id lock-screen
 bindsym $mod+Shift+x            exec --no-startup-id prompt "Shutdown computer?" "$shutdown"
 
 bindsym $mod+b                  bar mode toggle
+bindsym $mod+Shift+b            exec --no-startup-id bluetooth
 
 bindsym $mod+c                  reload
 bindsym $mod+Shift+c            restart
