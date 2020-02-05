@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+# This file runs when logged into a graphical X session.
+
+setbg &      # For desktop background
+compton &    # For transparency and screen tearing improvements
+dunst &      # For notifications
+unclutter &  # For removing mouse cursor when idle
+
+xset r rate 300 50 &
