@@ -24,3 +24,4 @@ $ stow bash/ i3/ bin/ # ... and other subdirectories
 - **feh**: A lightweight image viewer and desktop wallpaper manager.
 - **i3lock**: A simple screen locker.
 - **w3m**: A terminal based web browser (for ranger image previews).
+- **dwm**: A dynamic window manager for X.
