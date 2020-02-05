@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+# Sets the deskop wallpaper to the one configured in ~/.config/
+
+feh --bg-fill ~/.config/wallpaper.png

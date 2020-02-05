@@ -1,10 +1,12 @@
 #!/bin/bash
 # Executed for each new login shell.
 
+# Adds ~/.local/bin to $PATH
+export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
+
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
 # Adds `~/.scripts` and all subdirectories to $PATH
-export PATH="$PATH:$(du "$HOME/.scripts/" | cut -f2 | tr '\n' ':')"
 export PATH="$PATH:$HOME/.npm-global/bin/"
 export BROWSER="google-chrome-stable"
 export EDITOR="emacs"

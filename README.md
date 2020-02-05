@@ -9,7 +9,7 @@ These files can be installed on any system by creating symbolic links using [GNU
 ```bash
 $ git clone git@github.com:lazystring/dotfiles.git ~/.dotfiles
 $ cd ~/.dotfiles
-$ stow bash/ i3/ scripts/ # ... and other subdirectories
+$ stow bash/ i3/ bin/ # ... and other subdirectories
 ```
 
 ## Dependencies

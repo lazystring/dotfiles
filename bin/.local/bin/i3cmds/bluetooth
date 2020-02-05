@@ -1,0 +1,15 @@
+#!/bin/sh
+
+bluetoothctl power on
+
+selected_name=$(bluetoothctl devices | sed -n -E 's/.* ([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2} //p' | dmenu -p "Select a device to connect/disconnect: ")
+selected_addr=$(bluetoothctl devices | grep "$selected_name" | sed -n -E "s/.* (([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}) $selected_name.*/\1/p")
+
+connected_addr=$(bluetoothctl info | grep -oh "$selected_addr")
+
+# If the device is already connected, diconnect.
+if [[ "$connected_addr" == "$selected_addr" ]]; then
+  bluetoothctl disconnect $selected_addr
+else
+  bluetoothctl connect $selected_addr
+fi
