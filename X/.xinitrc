@@ -1,6 +1,6 @@
 #!/bin/sh
 
-[ -f ~/.xprofile] && . ~/.xprofile
+[ -f ~/.xprofile ] && . ~/.xprofile
 [ -f ~/.Xmodmap ] && xmodmap ~/.Xmodmap
 [ -f ~/.Xresources ] && xrdb -merge ~/.Xresources
 
