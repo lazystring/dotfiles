@@ -33,3 +33,6 @@ export PS1="${BOLD}${RED}[${YELLOW}\u${GREEN}@${BLUE}\h ${MAGENTA}\W${RED}]${WHI
 
 # Run other bash commands.
 [ -f "$HOME/.aliasrc" ] && source "$HOME/.aliasrc"
+
+# virtualenvwrapper initialization.
+source ~/.local/bin/virtualenvwrapper.sh

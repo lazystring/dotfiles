@@ -11,7 +11,7 @@ alias grep="grep --color=auto"
 alias ccat="highlight --out-format=ansi"
 alias icfg="e $HOME/.config/i3/config"
 alias ecfg="e $HOME/.emacs.d/init.el"
-alias nf="neofetch"
+alias dm="python manage.py"
 
 esource() {
     e $1 && source $1
@@ -44,22 +44,12 @@ dotify() {
   echo "Created dotfile at $dotfile_path/$dotfile_name"
 }
 
+# Switch to branch "main" and delete the current branch.
+gcleanup() {
+  branch_name=$(git branch --show-current)
+  g checkout main && g branch -D $branch_name
+}
 
-# Repurposes the Caps Lock key as a Control key.
-# Ex. capswap enable
-capswap() {
-  if [ "$#" -ne 1 ] || [[ "$1" != "enable" && "$1" != "disable" ]]; then
-    echo "Usage: capswap enable|disable"
-    return
-  fi
-
-  if [ "$1" = "enable" ]; then
-    sudo xmodmap -e "remove lock = Caps_Lock"
-    sudo xmodmap -e "add control = Caps_Lock"
-    sudo xmodmap -e "keysym Caps_Lock = Control_L"
-  else
-    sudo xmodmap -e "keycode 66 = Caps_Lock"
-    sudo xmodmap -e "remove control = Caps_Lock"
-    sudo xmodmap -e "add lock = Caps_Lock"
-  fi
+vcd() {
+  cd $HOME/git/$1 && workon $1
 }

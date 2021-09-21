@@ -2,9 +2,21 @@
 
 # This file runs when logged into a graphical X session.
 
-setbg &      # For desktop background
-compton &    # For transparency and screen tearing improvements
-dunst &      # For notifications
-unclutter &  # For removing mouse cursor when idle
+setbg &                            # For desktop background
+picom --no-fading-openclose &      # For transparency and screen tearing improvements
+dunst &                            # For notifications
+unclutter &                        # For removing mouse cursor when idle
+emacs --daemon &                   # To make emacs a bit faster.
+
+# Start running Pulse daemon.
+pulseaudio --start &
+
+# Autodetect display every few seconds.
+while [ true ]; do sleep 3s; autorandr --change; done &
 
 xset r rate 300 50 &
+
+# DWM status bar.
+if [ $LAZYWM = "dwm" ]; then
+  status &
+fi

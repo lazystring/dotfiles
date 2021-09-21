@@ -11,11 +11,14 @@ export LAZYWM="dwm"
 
 # Adds `~/.scripts` and all subdirectories to $PATH
 export PATH="$PATH:$HOME/.npm-global/bin/"
-export BROWSER="google-chrome-stable"
+export BROWSER="firefox"
 export EDITOR="emacs"
 export TERMINAL="st"
 export FILEMGR="ranger"
 export DOTFILES="$HOME/.dotfiles"
+
+# For OmniSharp to find .NET Framework.
+export FrameworkPathOverride=/Library/Frameworks/Mono.framework/Versions/Current
 
 # When logging into the first tty, start X.
 if [[ "$(tty)" = "/dev/tty1" ]]; then

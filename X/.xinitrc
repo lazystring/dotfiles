@@ -11,5 +11,7 @@ case "$LAZYWM" in
     done ;;
   i3)
     exec i3 ;;
+  xmonad)
+    exec xmonad ;;
   *) echo "No valid window manager configured" ;;
 esac
