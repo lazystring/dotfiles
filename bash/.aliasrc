@@ -3,7 +3,7 @@
 # Custom bash aliases and functions.
 
 alias p="sudo pacman"
-alias e="emacs -nw"
+alias e="emacsclient"
 alias g="git"
 alias mkd="mkdir -pv"
 alias ls="ls -hN --color=auto --group-directories-first"
@@ -12,6 +12,7 @@ alias ccat="highlight --out-format=ansi"
 alias icfg="e $HOME/.config/i3/config"
 alias ecfg="e $HOME/.emacs.d/init.el"
 alias dm="python manage.py"
+alias t="tmux"
 
 esource() {
     e $1 && source $1
