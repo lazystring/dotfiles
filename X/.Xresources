@@ -39,5 +39,5 @@
 st.alpha: 255
 
 ! Set a default font and font size as below:
-*.font:        Monaco-10
-URxvt.font:     xft:monospace:size=10
+*.font:        Fira Code Retina-10
+URxvt.font:     xft:Fira Code Retina:size=10
