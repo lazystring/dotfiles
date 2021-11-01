@@ -1,3 +1,11 @@
 #!/bin/sh
 
-xsetroot -name "$(battery)"
+formatted_date() {
+  date +"%B %d, %Y"
+}
+
+formatted_time() {
+  date +"%I:%M %p %Z"
+}
+
+xsetroot -name "| $(battery) | $(formatted_time) | $(formatted_date) |"

@@ -12,11 +12,11 @@ emacs --daemon &                   # To make emacs a bit faster.
 pulseaudio --start &
 
 # Autodetect display every few seconds.
-while [ true ]; do sleep 3s; autorandr --change; done &
+while [ true ]; do sleep 3s; autorandr --change; ~/.fehbg; done &
 
 xset r rate 300 50 &
 
 # DWM status bar.
 if [ $LAZYWM = "dwm" ]; then
-  status &
+  while true; do status; sleep 1; done &
 fi
