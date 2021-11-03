@@ -36,6 +36,7 @@
 (set-face-attribute 'default nil :font "Fira Code Retina" :height 100)
 (set-face-attribute 'fixed-pitch nil :font "Fira Code Retina" :height 100)
 (set-face-attribute 'variable-pitch nil :font "Linux Biolinum" :height 120 :weight 'regular)
+(set-fontset-font t 'symbol "Noto Color Emoji" nil 'append)
 
 ;; Initialize package sources
 (require 'package)
