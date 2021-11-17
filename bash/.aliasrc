@@ -3,7 +3,7 @@
 # Custom bash aliases and functions.
 
 alias p="sudo pacman"
-alias e="emacsclient"
+alias e="emacs"
 alias g="git"
 alias mkd="mkdir -pv"
 alias ls="ls -hN --color=auto --group-directories-first"
@@ -17,7 +17,6 @@ alias t="tmux"
 esource() {
     e $1 && source $1
 }
-
 
 # Adds a dot file to the dotfiles git repo.
 # Ex. dotify .emacs emacs/
@@ -54,3 +53,12 @@ gcleanup() {
 vcd() {
   cd $HOME/git/$1 && workon $1
 }
+
+emacs() {
+  if [ -t 1 ]; then
+    emacsclient -a $USER-emacsd $@
+  else
+    emacsclient -a $USER-emacsd -c -n
+  fi
+}
+	
