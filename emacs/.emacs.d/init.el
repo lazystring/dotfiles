@@ -22,6 +22,9 @@
 (column-number-mode)
 (global-display-line-numbers-mode t)
 
+;; Indentation
+(setq sh-basic-offset 2)
+
 ;; Disable line numbers for some modes
 (dolist (mode '(org-mode-hook
 		term-mode-hook
