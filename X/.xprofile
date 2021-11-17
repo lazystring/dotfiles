@@ -6,7 +6,6 @@ setbg &                            # For desktop background
 picom --no-fading-openclose &      # For transparency and screen tearing improvements
 dunst &                            # For notifications
 unclutter &                        # For removing mouse cursor when idle
-emacs --daemon &                   # To make emacs a bit faster.
 
 # Start running Pulse daemon.
 pulseaudio --start &
