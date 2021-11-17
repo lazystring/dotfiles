@@ -8,4 +8,4 @@ formatted_time() {
   date +"%I:%M %p %Z"
 }
 
-xsetroot -name "| $(battery) | $(formatted_time) | $(formatted_date) |"
+xsetroot -name " $(battery) | $(formatted_time) | $(formatted_date) "
