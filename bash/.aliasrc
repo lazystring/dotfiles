@@ -3,7 +3,7 @@
 # Custom bash aliases and functions.
 
 alias p="sudo pacman"
-alias e="emacs"
+alias e="em"
 alias g="git"
 alias mkd="mkdir -pv"
 alias ls="ls -hN --color=auto --group-directories-first"
@@ -52,13 +52,5 @@ gcleanup() {
 
 vcd() {
   cd $HOME/git/$1 && workon $1
-}
-
-emacs() {
-  if [ -t 1 ]; then
-    emacsclient -a $USER-emacsd $@
-  else
-    emacsclient -a $USER-emacsd -c -n
-  fi
 }
 	

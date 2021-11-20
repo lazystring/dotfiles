@@ -1,3 +1,11 @@
 #!/bin/sh
 
-emacsclient -nc $*
+emacsclient -e "(frames-on-display-list \"${DISPLAY}\")" 1>/dev/null 2>/dev/null
+
+if [ -t 1 ] && [[ "$#" == 1 ]]; then
+  emacsclient -a $USER-emacsd $@
+elif [ "$?" = "1" ]; then
+  emacsclient -c -n -a "" "$@"
+else
+  emacsclient -n "$@"
+fi
