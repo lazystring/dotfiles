@@ -1,0 +1,13 @@
+#!/bin/sh
+
+show_active() {
+  nmcli connection show --active
+}
+
+connection_name=$(basename -a /etc/openvpn/*.conf | xargs -I % basename % .conf | dmenu)
+
+if show_active | grep -q "$connection_name"; then
+  nmcli connection down $connection_name | xargs -0 notify-send
+else
+  nmcli connection up $connection_name | xargs -0 notify-send
+fi
