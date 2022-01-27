@@ -54,3 +54,15 @@ vcd() {
   cd $HOME/git/$1 && workon $1
 }
 	
+genpass() {
+  date +%s | sha256sum | base64 | head -c 16; echo
+}
+
+lsemacsd() {
+  ls "${TMPDIR-/tmp}/emacs$(id -u)"
+}
+
+# Alias for interacting with user services.
+function usv() {
+  SVDIR=$HOME/.local/sv sv "$@"
+}
