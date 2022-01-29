@@ -7,7 +7,7 @@
 (set-fringe-mode 10)       ; Give some breathing room
 (menu-bar-mode -1)            ; Disable the menu bar
 
-;; Set up the visible bell
+;; Set up the visible bell.
 (setq visible-bell t)
 
 (column-number-mode)
@@ -38,7 +38,8 @@
 (setq display-time-format "%l:%M %p %b %y"
       display-time-default-load-average nil)
 
-(use-package all-the-icons)
+(use-package all-the-icons
+  :if (display-graphic-p))
 
 (use-package minions
   :hook (doom-modeline-mode . minions-mode))
@@ -67,6 +68,9 @@
 (unless package-archive-contents
   (package-refresh-contents))
 
+(require 'use-package)
+(setq use-package-always-ensure t)
+
 (setq-default tab-width 2)
 (setq-default evil-shift-width tab-width)
 (setq-default indent-tabs-mode nil)
@@ -75,13 +79,49 @@
   :hook (prog-mode . rainbow-delimiters-mode))
 
 (use-package company
-  :init
-  (setq company-idle-delay 0)
-  :hook (prog-mode . company-mode))
+  :after lsp-mode
+  :hook (lsp-mode . company-mode)
+  :bind (:map company-active-map
+         ("<tab>" . company-complete-selection))
+        (:map lsp-mode-map
+         ("<tab>" . company-indent-or-complete-common))
+  :custom
+  (company-minimum-prefix-length 1)
+  (company-idle-delay 0.0))
+
+(use-package company-box
+  :hook (company-mode . company-box-mode))
 
 (use-package magit
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
+
+(defun ls/lsp-mode-setup ()
+  (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
+  (lsp-headerline-breadcrumb-mode))
+
+(use-package lsp-mode
+  :commands (lsp lsp-deferred)
+  :hook (lsp-mode . ls/lsp-mode-setup) 
+  :custom
+  (lsp-keymap-prefix "C-c l")
+  (lsp-headerline-breadcrumb-enable-diagnostics nil)
+  :config
+  (lsp-enable-which-key-integration t))
+
+(use-package lsp-ui
+  :hook (lsp-mode . lsp-ui-mode))
+
+(use-package lsp-treemacs
+  :after lsp)
+
+(use-package lsp-ivy)
+
+(use-package typescript-mode
+  :mode "\\.ts\\'"
+  :hook (typescript-mode . lsp-deferred)
+  :config
+  (setq typescript-indent-level 2))
 
 (use-package rjsx-mode
   :config
@@ -102,6 +142,9 @@
   ([remap describe-command] . helpful-command)
   ([remap describe-variable] . counsel-describe-variable)
   ([remap describe-key] . helpful-key))
+
+(use-package evil-nerd-commenter
+  :bind ("M-/" . evilnc-comment-or-uncomment-lines))
 
 (use-package projectile
   :diminish projectile-mode
@@ -228,7 +271,6 @@
   (set-face-attribute 'org-table nil  :inherit 'fixed-pitch)
   (set-face-attribute 'org-formula nil  :inherit 'fixed-pitch)
   (set-face-attribute 'org-code nil   :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-indent nil :inherit '(org-hide fixed-pitch))
   (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
   (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
   (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
@@ -381,20 +423,30 @@
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
-   (python . t)
-   (cpp . t))
+   (python . t)))
 
- (setq org-confirm-babel-evaluate nil)
+(setq org-confirm-babel-evaluate nil)
 
- ;; Structure Templates
- (require 'org-tempo)
 
- (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
- (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
- (add-to-list 'org-structure-template-alist '("py" . "src python"))
- (add-to-list 'org-structure-template-alist '("cc" . "src cpp"))
+(push '("conf-unix" . conf-unix) org-src-lang-modes)
 
- (push '("conf-unix" . conf-unix) org-src-lang-modes)
+;; Structure Templates
+(require 'org-tempo)
+
+(add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+(add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+(add-to-list 'org-structure-template-alist '("py" . "src python"))
+(add-to-list 'org-structure-template-alist '("cc" . "src cpp"))
+
+(defun ls/org-babel-tangle-config ()
+  """Automatically tangles Emacs.config when saved."""
+  (when (string-equal (file-name-nondirectory (buffer-file-name))
+                      "Emacs.org")
+    ;; Dynamic scoping to the rescue
+    (let ((org-confirm-babel-evaluate nil))
+      (org-babel-tangle))))
+
+(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'ls/org-babel-tangle-config)))
 
 (use-package mu4e
   :ensure nil
