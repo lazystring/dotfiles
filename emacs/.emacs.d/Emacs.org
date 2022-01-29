@@ -134,6 +134,15 @@ k
 
 #+end_src
 
+*** Setting up use-package
+
+#+begin_src emacs-lisp
+
+  (require 'use-package)
+  (setq use-package-always-ensure t)
+
+#+end_src
+
 * Editing
 
 ** Indentation
