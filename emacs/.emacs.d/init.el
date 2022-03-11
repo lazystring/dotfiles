@@ -27,8 +27,9 @@
 (use-package doom-themes
   :init (load-theme 'doom-one t))
 
-(set-face-attribute 'default nil :font "Fira Code Retina" :height 100)
-(set-face-attribute 'fixed-pitch nil :font "Fira Code Retina" :height 100)
+(setq ls/code-font "Iosevka")
+(set-face-attribute 'default nil :font ls/code-font :height 100)
+(set-face-attribute 'fixed-pitch nil :font ls/code-font :height 100)
 (set-face-attribute 'variable-pitch nil :font "Linux Biolinum" :height 120 :weight 'regular)
 (set-fontset-font t 'symbol "Noto Color Emoji" nil 'append)
 
