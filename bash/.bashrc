@@ -35,7 +35,8 @@ export PS1="${BOLD}${RED}[${YELLOW}\u${GREEN}@${BLUE}\h ${MAGENTA}\W${RED}]${WHI
 [ -f "$HOME/.aliasrc" ] && source "$HOME/.aliasrc"
 
 # virtualenvwrapper initialization.
-source ~/.local/bin/virtualenvwrapper.sh
+VIRTUALENVWRAPPER_PYTHON=$(which python3)
+source ~/.local/bin/virtualenvwrapper_lazy.sh
 
 # export NVM_DIR="$HOME/.nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

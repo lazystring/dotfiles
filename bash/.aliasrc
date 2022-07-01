@@ -13,6 +13,7 @@ alias icfg="e $HOME/.config/i3/config"
 alias ecfg="e $HOME/.emacs.d/init.el"
 alias dm="python manage.py"
 alias t="tmux"
+alias vim="nvim"
 
 esource() {
     e $1 && source $1
