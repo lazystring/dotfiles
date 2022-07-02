@@ -1,3 +1,4 @@
+" Basic Configuration
 set tabstop=2 softtabstop=2
 set shiftwidth=2
 set expandtab
@@ -18,20 +19,24 @@ set scrolloff=8
 set colorcolumn=80
 set signcolumn=yes
 
-" Plug-in manager
+" Plugins
 call plug#begin('~/.vim/plugged')
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-
-Plug 'NTBBloodbath/doom-one.nvim'
+  Plug 'NTBBloodbath/doom-one.nvim'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'fatih/vim-go'
 call plug#end()
 
+" UI
 colorscheme doom-one
 highlight Normal guibg=none
 
 let mapleader = " "
-nnoremap <leader>ps <cmd>lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep for > ") })<cr>
 
+lua require('lazystring')
+
+" Autocommands
 fun! TrimWhitespace()
   let l:save = winsaveview()
   keeppatterns %s/\s\+$//e

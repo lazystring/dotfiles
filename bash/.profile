@@ -12,6 +12,7 @@ export LAZYWM="dwm"
 # Adds `~/.scripts` and all subdirectories to $PATH
 export PATH="$PATH:$HOME/.npm-global/bin/"
 export PATH="$PATH:$HOME/.cargo/bin"
+export PATH="$PATH:$HOME/go/bin"
 export BROWSER="firefox"
 export EDITOR="em"
 export TERMINAL="st"
