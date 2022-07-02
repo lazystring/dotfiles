@@ -1,3 +1,3 @@
 require('lazystring.telescope')
-require('lazystring.lspconfig')
+require('lazystring.lsp')
 
