@@ -115,7 +115,7 @@ Don't warn for following symlinked files
     :hook (after-init . global-emojify-mode))
 
 #+end_src
-k
+
 ** Modeline
 
 *** Time Format
