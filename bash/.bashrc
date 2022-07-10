@@ -29,7 +29,7 @@ MAGENTA="\[$(tput setaf 5)\]"
 WHITE="\[$(tput setaf 7)\]"
 RESET="\[$(tput sgr0)\]"
 
-export PS1="${BOLD}${RED}[${YELLOW}\u${GREEN}@${BLUE}\h ${MAGENTA}\W${RED}]${WHITE}\$ ${RESET}"
+export PS1="${BOLD}${RED}[${YELLOW}\u${GREEN}@${BLUE} ${MAGENTA}\W${RED}]${WHITE}\$ ${RESET}"
 
 # Run other bash commands.
 [ -f "$HOME/.aliasrc" ] && source "$HOME/.aliasrc"
