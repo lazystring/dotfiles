@@ -1,6 +1,3 @@
-(when (file-exists-p "~/.work/.emacs")
-  (load "~/.work/.emacs"))
-
 (require 'package)
 
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
@@ -457,3 +454,6 @@
 (setq ls/mail-enabled (member system-name '("lazylaptop")))
 (when ls/mail-enabled
   (require 'ls-mail))
+
+(when (file-exists-p "~/.work/.emacs")
+  (load "~/.work/.emacs"))

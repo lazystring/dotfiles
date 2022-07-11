@@ -1,15 +1,6 @@
 #+title Emacs Configuration
 #+PROPERTY: header-args:emacs-lisp :tangle ./init.el
 
-* Work
-
-#+begin_src emacs-lisp
-
-  (when (file-exists-p "~/.work/.emacs")
-    (load "~/.work/.emacs"))
-
-#+end_src
-
 * General
 
 ** Package management
@@ -698,3 +689,12 @@ Don't warn for following symlinked files
     (require 'ls-mail))
 
 #+end_src
+* Work
+
+#+begin_src emacs-lisp
+
+  (when (file-exists-p "~/.work/.emacs")
+    (load "~/.work/.emacs"))
+
+#+end_src
+
