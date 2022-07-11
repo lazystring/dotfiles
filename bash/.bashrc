@@ -37,7 +37,7 @@ export PS1="${BOLD}${RED}[${YELLOW}\u${GREEN}@${BLUE} ${MAGENTA}\W${RED}]${WHITE
 
 # virtualenvwrapper initialization.
 VIRTUALENVWRAPPER_PYTHON=$(which python3)
-source ~/.local/bin/virtualenvwrapper_lazy.sh
+[ -f "$HOME/.local/bin/virtualenvwrapper_lazy.sh" ] && . "$HOME/.local/bin/virtualenvwrapper_lazy.sh"
 
 # export NVM_DIR="~/.nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
