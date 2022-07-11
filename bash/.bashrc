@@ -32,12 +32,13 @@ RESET="\[$(tput sgr0)\]"
 export PS1="${BOLD}${RED}[${YELLOW}\u${GREEN}@${BLUE} ${MAGENTA}\W${RED}]${WHITE}\$ ${RESET}"
 
 # Run other bash commands.
-[ -f "$HOME/.aliasrc" ] && source "$HOME/.aliasrc"
+[ -f "~/.aliasrc" ] && source "~/.aliasrc"
+[ -f "~/.work/.aliasrc" ] && . "~/.work/.aliasrc"
 
 # virtualenvwrapper initialization.
 VIRTUALENVWRAPPER_PYTHON=$(which python3)
 source ~/.local/bin/virtualenvwrapper_lazy.sh
 
-# export NVM_DIR="$HOME/.nvm"
+# export NVM_DIR="~/.nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
