@@ -1,3 +1,6 @@
+(when (file-exists-p "~/.work/.emacs")
+  (load "~/.work/.emacs"))
+
 (require 'package)
 
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
