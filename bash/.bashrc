@@ -32,8 +32,8 @@ RESET="\[$(tput sgr0)\]"
 export PS1="${BOLD}${RED}[${YELLOW}\u${GREEN}@${BLUE} ${MAGENTA}\W${RED}]${WHITE}\$ ${RESET}"
 
 # Run other bash commands.
-[ -f "~/.aliasrc" ] && source "~/.aliasrc"
-[ -f "~/.work/.aliasrc" ] && . "~/.work/.aliasrc"
+[ -f "$HOME/.aliasrc" ] && . "$HOME/.aliasrc"
+[ -f "$HOME/.work/.aliasrc" ] && . "$HOME/.work/.aliasrc"
 
 # virtualenvwrapper initialization.
 VIRTUALENVWRAPPER_PYTHON=$(which python3)
