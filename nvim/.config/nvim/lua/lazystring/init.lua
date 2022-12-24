@@ -1,3 +1,3 @@
-require('lazystring.telescope')
-require('lazystring.lsp')
-
+require("lazystring.set")
+require("lazystring.packer")
+require("lazystring.remap")
