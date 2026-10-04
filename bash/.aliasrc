@@ -67,3 +67,9 @@ lsemacsd() {
 function usv() {
   SVDIR=$HOME/.local/sv sv "$@"
 }
+
+# Replaces the given regexp across matching files.
+rrg() {
+  rg "$1" --files-with-matches
+  rg "$1" --files-with-matches | xargs sed -i "s|$1|$2|g"
+}

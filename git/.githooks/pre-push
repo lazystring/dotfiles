@@ -1,0 +1,49 @@
+#!/bin/bash
+set -euo pipefail
+
+remote_url="${2:-}"
+p_proto="sso"
+
+# Allow pushes to internal remotes without public-repo checks.
+if [[ "$remote_url" == "${p_proto}://"* ]]; then
+  exit 0
+fi
+
+# Block internal strings or work emails from being pushed to external remotes (e.g. GitHub).
+# Pattern is constructed dynamically so this hook file itself contains zero literal forbidden tokens.
+p_domain="google"
+p_corp="corp"
+p_g3="${p_domain}3"
+p_cider="cider""lsp"
+p_nv="nv""goog"
+p_blaze="blaze"
+FORBIDDEN_REGEX="(${p_domain}\\.com|${p_proto}://|/${p_domain}/|${p_g3}|${p_cider}|${p_nv}|${p_blaze}-|\\.c\\.googlers\\.com|\\.${p_corp}\\.)"
+
+while read -r local_ref local_sha remote_ref remote_sha; do
+  if [[ "$local_sha" =~ ^0+$ ]]; then
+    continue
+  fi
+
+  if [[ "$remote_sha" =~ ^0+$ ]]; then
+    range="$local_sha"
+  else
+    range="$remote_sha..$local_sha"
+  fi
+
+  # 1. Check commit author/committer emails in the push range
+  bad_authors=$(git log "$range" --format="%H %ae %ce" | grep -E -i "$FORBIDDEN_REGEX" || true)
+  if [[ -n "$bad_authors" ]]; then
+    echo "ERROR: [pre-push] Push to '$remote_url' blocked! Internal email detected in commit metadata:" >&2
+    echo "$bad_authors" >&2
+    exit 1
+  fi
+
+  # 2. Check commit diffs in the push range (excluding this hook file)
+  if git log -p "$range" -- . ':!.githooks/pre-push' ':!git/.githooks/pre-push' | grep -E -i -q "$FORBIDDEN_REGEX"; then
+    echo "ERROR: [pre-push] Push to '$remote_url' blocked! Forbidden internal pattern found in commit diffs:" >&2
+    git log -p "$range" -- . ':!.githooks/pre-push' ':!git/.githooks/pre-push' | grep -E -i -n "$FORBIDDEN_REGEX" | head -n 20 >&2
+    exit 1
+  fi
+done
+
+exit 0

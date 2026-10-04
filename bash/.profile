@@ -13,12 +13,11 @@ export LAZYWM="dwm"
 export PATH="$PATH:$HOME/.npm-global/bin/"
 export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:$HOME/go/bin"
-export BROWSER="firefox"
-export EDITOR="vim"
+export BROWSER="google-chrome"
+export EDITOR="nvim"
 export TERMINAL="st"
 export FILEMGR="ranger"
 export DOTFILES="$HOME/.dotfiles"
-export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/library
 
 # For OmniSharp to find .NET Framework.
 export FrameworkPathOverride=/Library/Frameworks/Mono.framework/Versions/Current

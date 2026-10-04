@@ -1,0 +1,12 @@
+[user]
+	name = John Bojorquez
+	email = johnbojorquez36@gmail.com
+
+[core]
+	hooksPath = ~/.githooks
+
+[include]
+	path = ~/.gitconfig.work
+
+[includeIf "gitdir:~/.dotfiles/"]
+	path = ~/.gitconfig.personal

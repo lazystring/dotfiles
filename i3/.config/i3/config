@@ -1,7 +1,7 @@
 ## Configuration settings for i3wm.
 
 ## i3-gaps settings ##
-for_window [class="^.*"] border pixel 2
+for_window [class="^.*"] border pixel 4
 gaps inner 15
 gaps outer 15
 
@@ -30,7 +30,7 @@ exec --no-startup-id compton -b
 exec --no-startup-id dunst
 
 # Set the background plz:
-exec --no-startup-id feh --bg-scale ~/.config/wallpaper.png
+exec --no-startup-id feh --bg-scale ~/.config/wallpaper-tall.png ~/.config/wallpaper-long.png
 
 ## Theme ##
 
@@ -54,7 +54,7 @@ set_from_resource $white        color15 #000000
 set $transparent                #00000000
 
 #                       BORDER          BACKGROUND      TEXT            INDICATOR               CHILD_BORDER
-client.focused          $red            $red            $magenta        $darkmagenta            $darkblue
+client.focused          $red            $red            $magenta        $darkmagenta            #bc42f4ff
 client.unfocused        $transparent    $blue           $white          $darkblue               $darkblack
 client.focused_inactive $transparent    $blue           $white          $darkblue               $darkblack
 client.urgent           $darkred        $darkred        $black          $darkred                $darkred

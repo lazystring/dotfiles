@@ -42,10 +42,10 @@
 (use-package doom-themes
   :init (load-theme 'doom-one t))
 
-(setq ls/code-font "Iosevka")
+(setq ls/code-font "Iosevka Term")
 (set-face-attribute 'default nil :font ls/code-font :height 100)
 (set-face-attribute 'fixed-pitch nil :font ls/code-font :height 100)
-(set-face-attribute 'variable-pitch nil :font "Linux Biolinum" :height 120 :weight 'regular)
+(set-face-attribute 'variable-pitch nil :font "Linux Biolinum O" :height 120 :weight 'regular)
 (set-fontset-font t 'symbol "Noto Color Emoji" nil 'append)
 
 (use-package emojify
@@ -83,7 +83,7 @@
 
 (use-package company
   :after lsp-mode
-  :hook (lsp-mode . company-mode)
+  :init (global-company-mode)
   :bind (:map company-active-map
          ("<tab>" . company-complete-selection))
         (:map lsp-mode-map
@@ -105,7 +105,7 @@
 
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
-  :hook (lsp-mode . ls/lsp-mode-setup) 
+  :hook (lsp-mode . ls/lsp-mode-setup)
   :custom
   (lsp-keymap-prefix "C-c l")
   (lsp-headerline-breadcrumb-enable-diagnostics nil)
@@ -156,8 +156,6 @@
   :bind-keymap
   ("C-c p" . projectile-command-map)
   :init
-  (when (file-directory-p "~/Projects")
-    (setq projectile-project-search-path '("~/Projects")))
   (setq projectile-switch-project-action #'projectile-dired))
 
 (use-package counsel-projectile
@@ -312,7 +310,7 @@
 
   (org-todo-keywords
    '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
-     (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w!/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")))
+     (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w!/!)" "BLOCKED(l)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")))
 
   (org-refile-targets
    '(("Archive.org" :maxlevel . 1)
@@ -356,6 +354,9 @@
      ("w" "Workflow Status"
       ((todo "WAIT"
              ((org-agenda-overriding-header "Waiting on External")
+              (org-agenda-files org-agenda-files)))
+      (todo "BLOCKED"
+             ((org-agenda-overriding-header "Blocked on External")
               (org-agenda-files org-agenda-files)))
        (todo "REVIEW"
              ((org-agenda-overriding-header "In Review")
@@ -455,5 +456,5 @@
 (when ls/mail-enabled
   (require 'ls-mail))
 
-(when (file-exists-p "~/.work/.emacs")
-  (load "~/.work/.emacs"))
+(when (file-exists-p "~/.config/work/.emacs")
+  (load "~/.config/work/.emacs"))

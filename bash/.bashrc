@@ -33,7 +33,7 @@ export PS1="${BOLD}${RED}[${YELLOW}\u${GREEN}@${BLUE} ${MAGENTA}\W${RED}]${WHITE
 
 # Run other bash commands.
 [ -f "$HOME/.aliasrc" ] && . "$HOME/.aliasrc"
-[ -f "$HOME/.work/.aliasrc" ] && . "$HOME/.work/.aliasrc"
+[ -f "$HOME/.config/work/.aliasrc" ] && . "$HOME/.config/work/.aliasrc"
 
 # virtualenvwrapper initialization.
 VIRTUALENVWRAPPER_PYTHON=$(which python3)
@@ -42,3 +42,7 @@ VIRTUALENVWRAPPER_PYTHON=$(which python3)
 # export NVM_DIR="~/.nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+  . /etc/bash_completion
+fi
