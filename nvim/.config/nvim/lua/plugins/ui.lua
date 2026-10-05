@@ -46,10 +46,10 @@ return {
         signs.linehl[vim.diagnostic.severity[name]] = ""
         signs.numhl[vim.diagnostic.severity[name]] = ""
       end
-      sign("ERROR", "󰅚")
-      sign("WARN", "󰀪")
-      sign("HINT", "󰌶")
-      sign("INFO", "")
+      sign("ERROR", "✖")
+      sign("WARN", "▲")
+      sign("HINT", "✦")
+      sign("INFO", "ℹ")
       vim.diagnostic.config({ signs = signs })
     end,
   },
@@ -88,6 +88,58 @@ return {
       { "<leader>dd", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Document Diagnostics (Trouble)" },
       { "<leader>dl", "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
       { "<leader>dq", "<cmd>Trouble quickfix toggle<cr>", desc = "Quickfix List (Trouble)" },
+    },
+  },
+
+  -- Markdown rendering in buffers, LSP hover popups, and nvim-cmp documentation
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    ft = { "markdown", "cmp_docs" },
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons",
+    },
+    init = function()
+      vim.treesitter.language.register("markdown", "cmp_docs")
+    end,
+    opts = {
+      file_types = { "markdown", "cmp_docs" },
+      render_modes = { "n", "c", "t", "i" },
+      heading = {
+        icons = { "§ ", "§§ ", "§§§ ", "§§§§ ", "§§§§§ ", "§§§§§§ " },
+        signs = { "§" },
+      },
+      bullet = {
+        icons = { "●", "○", "◆", "◇" },
+      },
+      checkbox = {
+        unchecked = { icon = "☐ " },
+        checked = { icon = "☑ " },
+      },
+      link = {
+        image = "▣ ",
+        email = "✉ ",
+        hyperlink = "↗ ",
+        wiki = { icon = "⌖ " },
+        custom = {
+          web = { pattern = "^http", icon = "↗ " },
+        },
+      },
+      overrides = {
+        buftype = {
+          nofile = {
+            anti_conceal = { enabled = false },
+            code = {
+              style = "normal",
+              border = "thin",
+              left_pad = 0,
+              right_pad = 0,
+            },
+            debounce = 0,
+            sign = { enabled = false },
+          },
+        },
+      },
     },
   },
 }
